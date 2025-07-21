@@ -1,0 +1,76 @@
+from zipfile import ZipFile
+import os
+
+# Struktur isi file
+files = {
+    "index.html": """<!DOCTYPE html>
+<html lang="id">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Klinik Senopati - Beranda</title><link rel="stylesheet" href="style.css"></head>
+<body><header><h1>Klinik Senopati</h1>
+<nav><a href="index.html">Beranda</a><a href="tentang.html">Tentang Kami</a>
+<a href="layanan.html">Layanan</a><a href="informasi.html">Informasi</a><a href="kontak.html">Kontak</a></nav></header>
+<main><section><h2>Selamat Datang di Klinik Senopati</h2>
+<p>Kami memberikan layanan kesehatan terpercaya untuk Anda dan keluarga.</p></section></main>
+<footer><p>&copy; 2025 Klinik Senopati</p></footer></body></html>""",
+
+    "tentang.html": """<!DOCTYPE html>
+<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tentang Kami</title><link rel="stylesheet" href="style.css"></head>
+<body><header><h1>Klinik Senopati</h1>
+<nav><a href="index.html">Beranda</a><a href="tentang.html">Tentang Kami</a>
+<a href="layanan.html">Layanan</a><a href="informasi.html">Informasi</a><a href="kontak.html">Kontak</a></nav></header>
+<main><section><h2>Tentang Klinik Senopati</h2>
+<p>Klinik kami memberikan suatu fasilitas kesehatan publik kecil yang didirikan untuk memberikan perawatan kepada pasien.</p></section></main>
+<footer><p>&copy; 2025 Klinik Senopati</p></footer></body></html>""",
+
+    "layanan.html": """<!DOCTYPE html>
+<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Layanan</title><link rel="stylesheet" href="style.css"></head>
+<body><header><h1>Klinik Senopati</h1>
+<nav><a href="index.html">Beranda</a><a href="tentang.html">Tentang Kami</a>
+<a href="layanan.html">Layanan</a><a href="informasi.html">Informasi</a><a href="kontak.html">Kontak</a></nav></header>
+<main><section><h2>Layanan Kami</h2>
+<ul><li>Laboratorium</li><li>Poli Gigi dan Mulut</li><li>Ruang Gawat Darurat</li><li>Poli Bidan</li><li>Poli Umum</li></ul>
+</section></main><footer><p>&copy; 2025 Klinik Senopati</p></footer></body></html>""",
+
+    "informasi.html": """<!DOCTYPE html>
+<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informasi</title><link rel="stylesheet" href="style.css"></head>
+<body><header><h1>Klinik Senopati</h1>
+<nav><a href="index.html">Beranda</a><a href="tentang.html">Tentang Kami</a>
+<a href="layanan.html">Layanan</a><a href="informasi.html">Informasi</a><a href="kontak.html">Kontak</a></nav></header>
+<main><section><h2>Informasi Tambahan</h2>
+<p>Silakan hubungi kami untuk mengetahui jadwal dokter, prosedur pemeriksaan, dan informasi penting lainnya.</p></section></main>
+<footer><p>&copy; 2025 Klinik Senopati</p></footer></body></html>""",
+
+    "kontak.html": """<!DOCTYPE html>
+<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kontak</title><link rel="stylesheet" href="style.css"></head>
+<body><header><h1>Klinik Senopati</h1>
+<nav><a href="index.html">Beranda</a><a href="tentang.html">Tentang Kami</a>
+<a href="layanan.html">Layanan</a><a href="informasi.html">Informasi</a><a href="kontak.html">Kontak</a></nav></header>
+<main><section><h2>Hubungi Kami</h2>
+<p>WhatsApp: <a href="https://wa.me/62123456">Chat Sekarang</a></p>
+<p>Telepon: 123456</p><p>Email: info@klinicsenopati.com</p></section></main>
+<footer><p>&copy; 2025 Klinik Senopati</p></footer></body></html>""",
+
+    "style.css": """body {
+    font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f7f7f7;
+}
+header { background: #007bff; color: white; padding: 20px; text-align: center; }
+nav a { margin: 0 10px; color: white; text-decoration: none; }
+main { padding: 20px; }
+footer { background: #eee; text-align: center; padding: 10px; position: relative; bottom: 0; width: 100%; }
+h1, h2 { color: #333; } a { color: #007bff; }"""
+}
+
+# Simpan file ke ZIP
+with ZipFile("klinik_senopati_website.zip", "w") as zipf:
+    for name, content in files.items():
+        with open(name, "w", encoding="utf-8") as f:
+            f.write(content)
+        zipf.write(name)
+        os.remove(name)
+
+print("File ZIP 'klinik_senopati_website.zip' berhasil dibuat.")
